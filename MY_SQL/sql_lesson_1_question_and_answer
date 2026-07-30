@@ -1,0 +1,44 @@
+========================================
+SQL BOOTCAMP — LESSON 1 ANSWERS
+========================================
+
+Q1.
+Display all students.
+
+SELECT *
+FROM students;
+
+
+Q2.
+Display only name and age.
+
+SELECT name, age
+FROM students;
+
+
+Q3.
+Display name and marks, with marks appearing
+as score.
+
+SELECT name, marks AS score
+FROM students;
+
+
+Q4.
+Display name and age + 5, with the calculated
+column named age_after_5_years.
+
+SELECT name, age + 5 AS age_after_5_years
+FROM students;
+
+
+Q5.
+Correct answer:
+
+B. row = one record
+   column = one attribute
+
+
+========================================
+LESSON 1 COMPLETED
+========================================
