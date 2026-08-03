@@ -206,7 +206,7 @@ MariaDB [HAMRO_MART_DB]> SELECT AVG(age) AS average_age
 
 - Average age of unique customers: `DISTINCT customer_id` → counts each customer only once.
 
-7. *Write a SQL query to find all transactions where the total_sale is greater than 1000:**
+7. **Write a SQL query to find all transactions where the total_sale is greater than 1000:**
   ```sql
   MariaDB [HAMRO_MART_DB]> SELECT *
   FROM
@@ -256,10 +256,10 @@ GROUP BY YEAR(sale_date), MONTH(sale_date)
     -> SUM(total_sale) AS total_sales
     -> FROM hamro_mart_data
     -> GROUP BY customer_id 
-    -> ORDER BY total_sale DESC
+    -> ORDER BY total_sales DESC
     -> LIMIT 5;
    ```
-   10. **Write a SQL query to find the number of unique customers who purchased items from each category:**
+10. **Write a SQL query to find the number of unique customers who purchased items from each category:**
        ```sql
        MariaDB [HAMRO_MART_DB]> SELECT
     -> category,
@@ -269,7 +269,7 @@ GROUP BY YEAR(sale_date), MONTH(sale_date)
     -> GROUP BY 1;
 
        ```
-   11. **Write a SQL query to create each shift and number of orders (Example Morning <12, Afternoon Between 12 & 17, Evening >17):**
+11. **Write a SQL query to create each shift and number of orders (Example Morning <12, Afternoon Between 12 & 17, Evening >17):**
        ```SQL
        MariaDB [HAMRO_MART_DB]> SELECT
     ->     CASE
@@ -281,3 +281,21 @@ GROUP BY YEAR(sale_date), MONTH(sale_date)
     -> FROM hamro_mart_data
     -> GROUP BY shift;
        ```
+# Findings
+
+- **Category Performance:** Electronics had the highest total sales, followed by Clothing and Beauty.
+- **Customer Insights:** Identified top-spending customers and unique customers by category.
+- **Sales Trends:** Identified the best-performing months and sales patterns.
+- **Shift Analysis:** Most orders were made during the Evening shift.
+- **Data Quality:** All 2,000 records were imported successfully with no NULL values.
+
+## Reports
+
+- **Sales Summary:** Total sales and orders by category.
+- **Monthly Analysis:** Average sales and best-performing months.
+- **Customer Analysis:** Top customers and unique customers by category.
+- **Shift Analysis:** Number of orders in each shift.
+
+## Conclusion
+
+This project helped me practice SQL from database creation and data import to data cleaning and analysis. I used SQL to understand sales, customers, categories, monthly trends, and order patterns.
