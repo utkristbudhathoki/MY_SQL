@@ -144,3 +144,19 @@ Empty set (0.000 sec)
 MariaDB [HAMRO_MART_DB]> 
 
 ```
+# 4. Data Analysis & Findings
+
+The following SQL queries were developed to answer specific business questions:
+
+1. **Write a SQL query to retrieve all columns for sales made on '2022-11-05**:
+```sql
+SELECT * FROM hamro_mart_data WHERE sale_date = '2022-11-05';
+```
+2. **Write a SQL query to retrieve all transactions where the category is 'Clothing' and the quantity sold is more than 4 in the month of Nov-2022**:
+```sql
+MariaDB [HAMRO_MART_DB]> SELECT *  FROM hamro_mart_data WHERE category = 'clothing'
+    -> AND TO_CHAR(sale_date,'yyyy-MM') = '2022-11'
+    -> AND
+    -> quantity >= 4;
+```
+NOTE: WE USED ```SQL TO_CHAR(date_column, 'yyyy-MM') = 'year-month' ```IN POSTGRES SQL BUT WE CAN USE ```SQL DATE_FORMAT(sale_date, '%Y-%m') = 'YEAR-MM' ```THIS FORMAT IN  MARIADB.
