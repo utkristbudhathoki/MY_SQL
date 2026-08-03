@@ -162,7 +162,7 @@ MariaDB [HAMRO_MART_DB]> SELECT *  FROM hamro_mart_data WHERE category = 'clothi
 ```
 NOTE: WE USED ```SQL TO_CHAR(date_column, 'yyyy-MM') = 'year-month' ``` IN POSTGRES SQL BUT WE CAN USE ```SQL DATE_FORMAT(sale_date, '%Y-%m') = 'YEAR-MM' ``` IN  MARIADB.
 
-3. **Write a SQL query to calculate the total sales (total_sale) for each category.:**
+3. **Write a SQL query to calculate the total sales (total_sale) for each category:**
  ```sql
  MariaDB [HAMRO_MART_DB]>   SELECT
     ->    category,
@@ -182,13 +182,14 @@ MariaDB [HAMRO_MART_DB]> SELECT
     -> GROUP BY 1,2;
 
 ```
-5.**Write a SQL query to find the average age of customers who purchased items from the 'Beauty' category.:**
+5.**Write a SQL query to find the average age of customers who purchased items from the 'Beauty' category:**
 ```sql
 MariaDB [HAMRO_MART_DB]> SELECT 
     -> ROUND(AVG(age),2) AS average_age
     -> FROM hamro_mart_data
     -> WHERE category = 'Beauty';
 ```
+
 6. **Write a SQL query to calculate the average age of unique customers who purchased items from the 'Beauty' category.**
 ```SQL
 
@@ -205,7 +206,7 @@ MariaDB [HAMRO_MART_DB]> SELECT AVG(age) AS average_age
 
 - Average age of unique customers: `DISTINCT customer_id` → counts each customer only once.
 
-  7.**Write a SQL query to find all transactions where the total_sale is greater than 1000.:**
+7. *Write a SQL query to find all transactions where the total_sale is greater than 1000:**
   ```sql
   MariaDB [HAMRO_MART_DB]> SELECT *
   FROM
@@ -214,7 +215,7 @@ MariaDB [HAMRO_MART_DB]> SELECT AVG(age) AS average_age
    total_sale >1000;
   ```
 
-8.**Write a SQL query to calculate the average sale for each month. Find out best selling month in each year.:**
+8. **Write a SQL query to calculate the average sale for each month. Find out best selling month in each year:**
 - FIRST LET'S Calculate the average for every month
 ```sql
 MariaDB [HAMRO_MART_DB]> SELECT
@@ -224,13 +225,13 @@ ROUND(AVG(total_sale),2) AS avg_sale
 FROM hamro_mart_data
 GROUP BY YEAR(sale_date), MONTH(sale_date);
 ```
--Rank the months within each year
+- Rank the months within each year
 ```SQL
 RANK() OVER (
     PARTITION BY YEAR(sale_date)
     ORDER BY AVG(total_sale) DESC )
  ```
--NOW BOTH COMBINE
+- NOW BOTH COMBINE
 ```SQL
 MariaDB [HAMRO_MART_DB]> SELECT
  year,month,avg_sale
@@ -248,3 +249,35 @@ GROUP BY YEAR(sale_date), MONTH(sale_date)
  AS monthly_sales
  WHERE ranking = 1;
 ```
+9. **Write a SQL query to find the top 5 customers based on the highest total sales:**
+   ```sql
+   MariaDB [HAMRO_MART_DB]> SELECT 
+    -> customer_id,
+    -> SUM(total_sale) AS total_sales
+    -> FROM hamro_mart_data
+    -> GROUP BY customer_id 
+    -> ORDER BY total_sale DESC
+    -> LIMIT 5;
+   ```
+   10. **Write a SQL query to find the number of unique customers who purchased items from each category:**
+       ```sql
+       MariaDB [HAMRO_MART_DB]> SELECT
+    -> category,
+    -> COUNT(DISTINCT customer_id) AS Unique_customers
+    -> FROM
+    -> hamro_mart_data
+    -> GROUP BY 1;
+
+       ```
+   11. **Write a SQL query to create each shift and number of orders (Example Morning <12, Afternoon Between 12 & 17, Evening >17):**
+       ```SQL
+       MariaDB [HAMRO_MART_DB]> SELECT
+    ->     CASE
+    ->         WHEN HOUR(sale_time) < 12 THEN 'Morning'
+    ->         WHEN HOUR(sale_time) BETWEEN 12 AND 17 THEN 'Afternoon'
+    ->         ELSE 'Evening'
+    ->     END AS shift,
+    ->     COUNT(*) AS number_of_orders
+    -> FROM hamro_mart_data
+    -> GROUP BY shift;
+       ```
