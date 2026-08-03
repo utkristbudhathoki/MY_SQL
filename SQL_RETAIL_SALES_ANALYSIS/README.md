@@ -152,6 +152,7 @@ The following SQL queries were developed to answer specific business questions:
 ```sql
 SELECT * FROM hamro_mart_data WHERE sale_date = '2022-11-05';
 ```
+
 2. **Write a SQL query to retrieve all transactions where the category is 'Clothing' and the quantity sold is more than 4 in the month of Nov-2022**:
 ```sql
 MariaDB [HAMRO_MART_DB]> SELECT *  FROM hamro_mart_data WHERE category = 'clothing'
@@ -159,4 +160,23 @@ MariaDB [HAMRO_MART_DB]> SELECT *  FROM hamro_mart_data WHERE category = 'clothi
     -> AND
     -> quantity >= 4;
 ```
-NOTE: WE USED ```SQL TO_CHAR(date_column, 'yyyy-MM') = 'year-month' ```IN POSTGRES SQL BUT WE CAN USE ```SQL DATE_FORMAT(sale_date, '%Y-%m') = 'YEAR-MM' ```THIS FORMAT IN  MARIADB.
+NOTE: WE USED ```SQL TO_CHAR(date_column, 'yyyy-MM') = 'year-month' ``` IN POSTGRES SQL BUT WE CAN USE ```SQL DATE_FORMAT(sale_date, '%Y-%m') = 'YEAR-MM' ``` IN  MARIADB.
+
+3. **Write a SQL query to calculate the total sales (total_sale) for each category.:**
+ ```sql
+   SELECT
+   category,
+   SUM(total_sale)AS net_sale,
+   COUNT(*)AS total_orders FROM
+   hamro_mart_data
+   GROUP BY 1 OR category;
+   ```
+4. Write a SQL query to calculate the total sales (total_sale) and number of orders for each category, separated by gender.
+ ```sql
+SELECT
+gender,category,
+SUM(total_sale)AS net_sale,
+COUNT(*)AS total_orders FROM
+hamro_mart_data
+GROUP BY 1,2;
+```
