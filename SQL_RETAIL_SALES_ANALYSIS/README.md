@@ -66,9 +66,10 @@ MariaDB [HAMRO_MART_DB]> LOAD DATA LOCAL INFILE '/home/utkrist/MY SQL/SQL_RETAIL
     -> IGNORE 1 ROWS
     -> (transactions_id, sale_date, sale_time, customer_id, gender, age, category, quantity, price_per_unit, cogs, total_sale);
 ```
+# Screenshot
+![CSV Data Import](screenshots/import_of_data.png)
 
-### Import Result
-
+# Import Result
 The CSV contained 2,000 data records, and all 2,000 records were imported successfully.
 
-![CSV Data Import](screenshots/import_of_data.png)
+
