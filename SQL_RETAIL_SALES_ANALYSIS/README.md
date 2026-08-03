@@ -72,4 +72,75 @@ MariaDB [HAMRO_MART_DB]> LOAD DATA LOCAL INFILE '/home/utkrist/MY SQL/SQL_RETAIL
 # Import Result
 The CSV contained 2,000 data records, and all 2,000 records were imported successfully.
 
+# 3. Data Cleaning
 
+After importing the CSV data, I checked the table for missing (`NULL`) values across all columns.
+
+The check showed that there were **0 NULL values** in the 2,000 imported records.
+
+Therefore, no records needed to be deleted due to missing values.
+
+```sql
+MariaDB [HAMRO_MART_DB]> SELECT *
+    -> FROM hamro_mart_data
+    -> WHERE
+    ->     transactions_id IS NULL
+    ->     OR sale_date IS NULL
+    ->     OR sale_time IS NULL
+    ->     OR customer_id IS NULL
+    ->     OR gender IS NULL
+    ->     OR age IS NULL
+    ->     OR category IS NULL
+    ->     OR quantity IS NULL
+    ->     OR price_per_unit IS NULL
+    ->     OR cogs IS NULL
+    ->     OR total_sale IS NULL;
+Empty set (0.002 sec)
+
+MariaDB [HAMRO_MART_DB]> SELECT COUNT(*) AS null_rows
+    -> FROM hamro_mart_data
+    -> WHERE
+    ->     transactions_id IS NULL
+    ->     OR sale_date IS NULL
+    ->     OR sale_time IS NULL
+    ->     OR customer_id IS NULL
+    ->     OR gender IS NULL
+    ->     OR age IS NULL
+    ->     OR category IS NULL
+    ->     OR quantity IS NULL
+    ->     OR price_per_unit IS NULL
+    ->     OR cogs IS NULL
+    ->     OR total_sale IS NULL;
++-----------+
+| null_rows |
++-----------+
+|         0 |
++-----------+
+1 row in set (0.002 sec)
+
+MariaDB [HAMRO_MART_DB]> SELECT
+    ->     COUNT(*) - COUNT(transactions_id) AS transactions_id_null,
+    ->     COUNT(*) - COUNT(sale_date) AS sale_date_null,
+    ->     COUNT(*) - COUNT(sale_time) AS sale_time_null,
+    ->     COUNT(*) - COUNT(customer_id) AS customer_id_null,
+    ->     COUNT(*) - COUNT(gender) AS gender_null,
+    ->     COUNT(*) - COUNT(age) AS age_null,
+    ->     COUNT(*) - COUNT(category) AS category_null,
+    ->     COUNT(*) - COUNT(quantity) AS quantity_null,
+    ->     COUNT(*) - COUNT(price_per_unit) AS price_per_unit_null,
+    ->     COUNT(*) - COUNT(cogs) AS cogs_null,
+    ->     COUNT(*) - COUNT(total_sale) AS total_sale_null
+    -> FROM hamro_mart_data;
++----------------------+----------------+----------------+------------------+-------------+----------+---------------+---------------+---------------------+-----------+-----------------+
+| transactions_id_null | sale_date_null | sale_time_null | customer_id_null | gender_null | age_null | category_null | quantity_null | price_per_unit_null | cogs_null | total_sale_null |
++----------------------+----------------+----------------+------------------+-------------+----------+---------------+---------------+---------------------+-----------+-----------------+
+|                    0 |              0 |              0 |                0 |           0 |        0 |             0 |             0 |                   0 |         0 |               0 |
++----------------------+----------------+----------------+------------------+-------------+----------+---------------+---------------+---------------------+-----------+-----------------+
+1 row in set (0.004 sec)
+
+MariaDB [HAMRO_MART_DB]> SHOW WARNINGS;
+Empty set (0.000 sec)
+
+MariaDB [HAMRO_MART_DB]> 
+
+```
