@@ -55,3 +55,20 @@ I will work through the project step by step, starting with database setup and d
     ->     total_sale FLOAT
     -> );
   ```
+# 2. Data Import
+
+I imported the CSV dataset into the `hamro_mart_data` table using MariaDB's
+```sql
+MariaDB [HAMRO_MART_DB]> LOAD DATA LOCAL INFILE '/home/utkrist/MY SQL/SQL_RETAIL_SALES_ANALYSIS/SQL - Retail Sales Analysis_Data .csv'
+    -> INTO TABLE hamro_mart_data
+    -> FIELDS TERMINATED BY ','
+    -> LINES TERMINATED BY '\n'
+    -> IGNORE 1 ROWS
+    -> (transactions_id, sale_date, sale_time, customer_id, gender, age, category, quantity, price_per_unit, cogs, total_sale);
+```
+
+### Import Result
+
+The CSV contained 2,000 data records, and all 2,000 records were imported successfully.
+
+![CSV Data Import](screenshots/import_of_data.png)
