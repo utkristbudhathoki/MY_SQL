@@ -152,7 +152,7 @@ The following SQL queries were developed to answer specific business questions:
 ```sql
 SELECT * FROM hamro_mart_data WHERE sale_date = '2022-11-05';
 ```
-NOTE: WE USED ```TO_CHAR(date_column, 'yyyy-MM') = 'year-month' ``` IN POSTGRES SQL BUT WE CAN USE ```SQL DATE_FORMAT(sale_date, '%Y-%m') = 'YEAR-MM' ``` IN  MARIADB.
+
 
 ### 2. **Write a SQL query to retrieve all transactions where the category is 'Clothing' and the quantity sold is more than 4 in the month of Nov-2022:**
 
@@ -162,6 +162,7 @@ MariaDB [HAMRO_MART_DB]> SELECT * FROM hamro_mart_data
     -> AND TO_CHAR(sale_date,'yyyy-MM') = '2022-11'
     -> AND quantity >= 4;
 ```
+NOTE: WE USED ```TO_CHAR(date_column, 'yyyy-MM') = 'year-month' ``` IN POSTGRES SQL BUT WE CAN USE ```SQL DATE_FORMAT(sale_date, '%Y-%m') = 'YEAR-MM' ``` IN  MARIADB.
 
 ### 2B. **Write a SQL query to find customers who purchased 4 or more Clothing items in total during the month of Nov-2022, combining their multiple transactions:**
 
