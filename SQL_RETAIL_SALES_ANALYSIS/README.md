@@ -1,6 +1,6 @@
 # Retail Sales Analysis SQL Project
 
-## Project Overview
+
 
 I created this project to practice SQL by working with a retail sales dataset in MariaDB.
 
